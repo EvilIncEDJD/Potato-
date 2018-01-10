@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Potato extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	
+	Texture texture;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
