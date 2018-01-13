@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import ipca.projeto.a13219_a13220.Outros.Assets;
 import ipca.projeto.a13219_a13220.Potato;
 
 /**
