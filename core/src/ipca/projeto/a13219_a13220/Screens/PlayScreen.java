@@ -22,6 +22,7 @@ import ipca.projeto.a13219_a13220.HUD.Hud;
 import ipca.projeto.a13219_a13220.Outros.Assets;
 import ipca.projeto.a13219_a13220.Outros.WorldCreator;
 import ipca.projeto.a13219_a13220.Potato;
+import ipca.projeto.a13219_a13220.Sprites.Player;
 
 /**
  * Created by Bruno on 13/01/2018.
