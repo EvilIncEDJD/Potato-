@@ -35,9 +35,9 @@ public class MainMenuScreen extends ScreenAdapter {
 
         camera.position.set(Potato.V_WIDTH/2,Potato.V_HEIGHT /2,0);
         // soundBounds = new Rectangle(0, 0, 64, 64);
-        playBounds = new Rectangle(Potato.V_WIDTH / 2 - 50,50, 100,100);
-        highscoresBounds = new Rectangle(0, 0, 100, 100);
-        optionsBounds = new Rectangle(Potato.V_WIDTH - 100, 0, 100, 100);
+        playBounds = new Rectangle(Potato.V_WIDTH / 2 - 60,30, 100,100);
+        highscoresBounds = new Rectangle(0,50, 150,150);
+        optionsBounds = new Rectangle(Potato.V_WIDTH -150,50, 150,150);
         touchPoint = new Vector3();
     }
 
@@ -104,9 +104,9 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(Assets.background,0,0,Potato.V_WIDTH,Potato.V_HEIGHT);
-        game.batch.draw(Assets.playButton,Potato.V_WIDTH / 2 - 50,50, 100,100);
-        game.batch.draw(Assets.scoreButton,0,0, 100,100);
-        game.batch.draw(Assets.optionsButton,Potato.V_WIDTH -100,0, 100,100);
+        game.batch.draw(Assets.playButton,Potato.V_WIDTH / 2 - 60,30, 100,100);
+        game.batch.draw(Assets.scoreButton,0,50, 150,150);
+        game.batch.draw(Assets.optionsButton,Potato.V_WIDTH -150,50, 150,150);
         game.batch.end();
     }
 
