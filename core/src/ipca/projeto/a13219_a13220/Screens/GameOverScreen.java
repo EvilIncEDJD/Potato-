@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import ipca.projeto.a13219_a13220.HUD.Hud;
 import ipca.projeto.a13219_a13220.Outros.Assets;
 import ipca.projeto.a13219_a13220.Potato;
 
@@ -20,25 +21,24 @@ public class GameOverScreen extends ScreenAdapter{
     OrthographicCamera camera;
     Vector3 touchPoint;
     Rectangle backBounds;
+    private Rectangle restartBounds;
     String[] highScores;
-    String Score;
+    String score, gameOver, scoreText;
     float xOffset = 0;
     GlyphLayout glyphLayout = new GlyphLayout();
 
     public GameOverScreen(Potato game) {
         this.game = game;
+        restartBounds = new Rectangle(100, 100, 100, 100);
 
         camera = new OrthographicCamera(Potato.V_WIDTH, Potato.V_HEIGHT);
         camera.position.set(Potato.V_WIDTH / 2, Potato.V_HEIGHT / 2, 0);
-        backBounds = new Rectangle(0, 0, 64, 64);
+        backBounds = new Rectangle(Potato.V_WIDTH -200, 100, 100, 100);
         touchPoint = new Vector3();
-        Score = new String("HighScore");
-        highScores = new String[5];
-        for (int i = 0; i < 5; i++) {
-            highScores[i] = i + 1 + ". " + Options.highscores[i];
-            glyphLayout.setText(Assets.font, highScores[i]);
-            xOffset = Math.max(glyphLayout.width, xOffset);
-        }
+        gameOver = new String("G A M E  O V E R");
+        scoreText = new String("SCORE");
+
+
     }
     public void update () {
         if (Gdx.input.justTouched()) {
@@ -49,6 +49,13 @@ public class GameOverScreen extends ScreenAdapter{
                 game.setScreen(new MainMenuScreen(game));
                 return;
             }
+
+            if (restartBounds.contains(touchPoint.x, touchPoint.y)) {
+                Assets.playSound(Assets.clickSound);
+                game.setScreen(new PlayScreen(game));
+                return;
+            }
+
         }
     }
 
@@ -60,14 +67,16 @@ public class GameOverScreen extends ScreenAdapter{
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(Assets.background, 0, 0, Potato.V_WIDTH, Potato.V_HEIGHT);
-        Assets.font.draw(game.batch,Score,Potato.V_WIDTH/2,Potato.V_HEIGHT/2);
-        float y = 230;
-        for (int i = 4; i >= 0; i--) {
-            Assets.font.draw(game.batch, highScores[i], xOffset, y);
-            y += Assets.font.getLineHeight();
-        }
+        game.batch.draw(Assets.restartButton,100, 100, 100, 100);
 
-        game.batch.draw(Assets.arrow, 0, 0, 64, 64);
+        Assets.font.draw(game.batch,gameOver,Potato.V_WIDTH/2-70 ,Potato.V_HEIGHT-100);
+
+                score = Integer.toString(Hud.score);
+            Assets.font.draw(game.batch, score,Potato.V_WIDTH/2,Potato.V_HEIGHT/2);
+        Assets.font.draw(game.batch, scoreText,Potato.V_WIDTH/2 -20,Potato.V_HEIGHT/2 +100);
+
+
+        game.batch.draw(Assets.noButton, Potato.V_WIDTH -200, 100, 100, 100);
         game.batch.end();
 
 

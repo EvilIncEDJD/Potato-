@@ -49,7 +49,6 @@ public class Player extends Sprite {
         playerisDead = false;
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
-
         for(int i = 1; i < 5; i++) {
             frames.add(new TextureRegion(screen.getAtlas().findRegion("RunFausto"), i * 256, 0, 256, 256));
             running = new Animation(0.2f, frames);
@@ -134,8 +133,8 @@ public class Player extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(60/ Potato.PPM);
         fdef.filter.categoryBits = Potato.PLAYER_BIT;
-        fdef.filter.maskBits = Potato.GROUND_BIT |
-                Potato.ENEMY_BIT |
+        fdef.filter.maskBits = Potato.GROUND_BIT | Potato.OBJECT_BIT|
+                Potato.SACO_BIT |
                 Potato.ITEM_BIT;
 
         fdef.shape = shape;

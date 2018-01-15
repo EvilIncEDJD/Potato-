@@ -21,6 +21,7 @@ public class Assets {
     public static Texture pauseButton;
     public static Texture arrow, arrowred;
     public static Texture restartButton;
+    public static Texture direita, esquerda, salto, martelo;
     public static Texture noButton;
     public static Texture soundButton,nosoundButton;
     public static Sound clickSound;
@@ -32,6 +33,10 @@ public class Assets {
         background = new Texture("imagens/background.png");
         backgroundgame= new Texture("imagens/backgroundgame.png");
         playButton = new Texture("imagens/playButton.png");
+        esquerda = new Texture("imagens/botaoesquerda.png");
+        direita = new Texture("imagens/botaodireita.png");
+        salto = new Texture("imagens/botaosaltar.png");
+        martelo = new Texture("imagens/martelo.png");
         scoreButton = new Texture("imagens/score.png");
         optionsButton = new Texture("imagens/settings.png");
         //scoreButtonclick =  new Texture("imagens/score2.png");

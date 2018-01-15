@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import ipca.projeto.a13219_a13220.Enemies.Enemy;
 import ipca.projeto.a13219_a13220.Item.Items;
 import ipca.projeto.a13219_a13220.Item.Martelo;
+import ipca.projeto.a13219_a13220.Item.MoneyBag;
 import ipca.projeto.a13219_a13220.Potato;
 import ipca.projeto.a13219_a13220.Screens.PlayScreen;
 import ipca.projeto.a13219_a13220.Sprites.Player;
@@ -27,12 +28,7 @@ public class ObjectContact implements ContactListener {
 
         switch (cDef)
         {
-          /*  case Potato.PLAYER_BIT | Potato.ENEMY_BIT:
-                if(fixA.getFilterData().categoryBits == Potato.PLAYER_BIT)
-                    ((Player) fixA.getUserData()).hit();
-                else
-                    ((Player) fixB.getUserData()).hit();
-                break;*/
+
             case Potato.PLAYER_BIT | Potato.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Potato.PLAYER_BIT)
                     ((Player) fixA.getUserData()).hit();
@@ -62,8 +58,51 @@ public class ObjectContact implements ContactListener {
                 else
                     ((Player) fixB.getUserData()).AllowJump();
                 break;
+            case Potato.GROUND_BIT | Potato.MARTELO_BIT:
+                if(fixA.getFilterData().categoryBits == Potato.GROUND_BIT) {
 
 
+                    ((Martelo)fixB.getUserData()).setToDestroy();
+                }
+                else {
+
+                    ((Martelo)fixA.getUserData()).setToDestroy();
+                }
+                break;
+
+            case Potato.PLAYER_BIT | Potato.SACO_BIT:
+                if(fixA.getFilterData().categoryBits == Potato.PLAYER_BIT) {
+
+                    ((Player) fixA.getUserData()).hit();
+                    ((MoneyBag)fixB.getUserData()).setToDestroy();
+                }
+                else {
+                    ((Player) fixB.getUserData()).hit();
+                    ((MoneyBag)fixA.getUserData()).setToDestroy();
+                }
+                break;
+            case Potato.GROUND_BIT | Potato.SACO_BIT:
+                if(fixA.getFilterData().categoryBits == Potato.GROUND_BIT) {
+
+
+                    ((MoneyBag)fixB.getUserData()).setToDestroy();
+                }
+                else {
+
+                    ((MoneyBag)fixA.getUserData()).setToDestroy();
+                }
+                break;
+            case Potato.OBJECT_BIT | Potato.SACO_BIT:
+                if(fixA.getFilterData().categoryBits == Potato.OBJECT_BIT) {
+
+
+                    ((MoneyBag)fixB.getUserData()).setToDestroy();
+                }
+                else {
+
+                    ((MoneyBag)fixA.getUserData()).setToDestroy();
+                }
+                break;
 
         }
     }

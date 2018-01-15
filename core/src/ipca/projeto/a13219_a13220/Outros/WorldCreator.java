@@ -16,6 +16,7 @@ import ipca.projeto.a13219_a13220.Enemies.RichGuy;
 import ipca.projeto.a13219_a13220.Item.Batata;
 import ipca.projeto.a13219_a13220.Potato;
 import ipca.projeto.a13219_a13220.Screens.PlayScreen;
+import ipca.projeto.a13219_a13220.Sprites.Player;
 
 /**
  * Created by Carlos Alves on 13/01/2018.
@@ -26,7 +27,7 @@ public class WorldCreator {
     private Array<RichGuy> badGuy;
     private Array<Batata> batatas;
 
-
+    Player player;
 
     public WorldCreator(PlayScreen screen)
     {

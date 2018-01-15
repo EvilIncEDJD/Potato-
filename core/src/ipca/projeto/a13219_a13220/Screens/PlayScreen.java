@@ -60,6 +60,7 @@ public class PlayScreen implements Screen {
     private Rectangle pauseBounds;
     private Rectangle restartBounds;
     private Rectangle noBounds;
+    private Rectangle leftBounds,rightBounds,jumpBounds,marteloBounds;
     private Rectangle soundBounds;
     private boolean sound;
     private int jumpTimes;
@@ -84,6 +85,10 @@ public class PlayScreen implements Screen {
         pauseBounds = new Rectangle((Potato.V_WIDTH - 50)/ Potato.PPM, (Potato.V_HEIGHT -50)/ Potato.PPM, 50/ Potato.PPM, 50/ Potato.PPM);
         soundBounds = new Rectangle((Potato.V_WIDTH - 50)/ Potato.PPM, 0, 50/ Potato.PPM, 50/ Potato.PPM);
         restartBounds = new Rectangle(0, 0, 100/ Potato.PPM, 100/ Potato.PPM);
+       leftBounds = new Rectangle(0, 0, 100/ Potato.PPM, 100/ Potato.PPM);
+        rightBounds = new Rectangle(100/Potato.PPM, 0, 100/ Potato.PPM, 100/ Potato.PPM);
+        marteloBounds = new Rectangle((Potato.V_WIDTH-100)/Potato.PPM, 100/Potato.PPM, 100/ Potato.PPM, 100/ Potato.PPM);
+        jumpBounds = new Rectangle((Potato.V_WIDTH-200)/Potato.PPM, 50/Potato.PPM, 100/ Potato.PPM, 100/ Potato.PPM);
         noBounds = new Rectangle(0, (Potato.V_HEIGHT -50)/ Potato.PPM, 50/ Potato.PPM, 50/ Potato.PPM);
         camera.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight() /2,0);
         camera2.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight() /2,0);
@@ -110,7 +115,33 @@ public class PlayScreen implements Screen {
             jumpTimes--;
 
         }
-
+        if (Gdx.input.isTouched()) {
+            camera2.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if (leftBounds.contains(touchPoint.x, touchPoint.y)&& player.body.getLinearVelocity().x>=-2) {
+                player.body.applyLinearImpulse(new Vector2(-1f,0f),player.body.getWorldCenter(),true);
+                return;
+            }
+            if (rightBounds.contains(touchPoint.x, touchPoint.y)&& player.body.getLinearVelocity().x<=2)
+            {
+                player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
+                return;
+            }
+        }
+        if (Gdx.input.justTouched()) {
+            camera2.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if(jumpBounds.contains(touchPoint.x, touchPoint.y)&& jumpTimes !=0)
+            {
+                if(jumpTimes == 2)
+                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                if(jumpTimes == 1)
+                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                jumpTimes--;
+            }
+            if(marteloBounds.contains(touchPoint.x, touchPoint.y)&& jumpTimes !=0)
+            {
+                player.fire();
+            }
+        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.body.getLinearVelocity().x<=2)
             player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
@@ -197,6 +228,8 @@ public class PlayScreen implements Screen {
 
                 break;
             case GAMEOVER:
+                Options.addScore(Hud.score);
+                Options.save();
                 game.setScreen(new GameOverScreen(game));
                 break;
         }
@@ -258,6 +291,10 @@ public class PlayScreen implements Screen {
         {
             case INGAME:
                 game.batch.draw(Assets.pauseButton,(Potato.V_WIDTH - 50)/ Potato.PPM, (Potato.V_HEIGHT -50)/ Potato.PPM, 50/ Potato.PPM, 50/ Potato.PPM);
+                game.batch.draw(Assets.esquerda,0, 0, 100/ Potato.PPM, 100/ Potato.PPM);
+                game.batch.draw(Assets.direita,100/Potato.PPM, 0, 100/ Potato.PPM, 100/ Potato.PPM);
+                game.batch.draw(Assets.martelo,(Potato.V_WIDTH-100)/Potato.PPM, 100/Potato.PPM, 100/ Potato.PPM, 100/ Potato.PPM);
+                game.batch.draw(Assets.salto,(Potato.V_WIDTH-200)/Potato.PPM, 50/Potato.PPM, 100/ Potato.PPM, 100/ Potato.PPM);
 
                 break;
             case PAUSA:
@@ -282,7 +319,7 @@ public class PlayScreen implements Screen {
     {
         return world;
     }
-
+  public Player getPlayer(){return player;}
     public TiledMap getMap(){
         return map;
     }

@@ -62,10 +62,10 @@ public class HighScoresScreen extends ScreenAdapter {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(Assets.background, 0, 0, Potato.V_WIDTH, Potato.V_HEIGHT);
-        Assets.font.draw(game.batch,Score,Potato.V_WIDTH/2,Potato.V_HEIGHT/2);
+        Assets.font.draw(game.batch,Score,Potato.V_WIDTH/2,Potato.V_HEIGHT - 100);
         float y = 230;
         for (int i = 4; i >= 0; i--) {
-            Assets.font.draw(game.batch, highScores[i], xOffset, y);
+            Assets.font.draw(game.batch, highScores[i], Potato.V_WIDTH/2, y);
             y += Assets.font.getLineHeight();
         }
 

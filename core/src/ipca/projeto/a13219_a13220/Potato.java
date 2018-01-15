@@ -24,6 +24,7 @@ public class Potato extends Game {
 	public static final short ITEM_BIT= 8;
 	public static final short OBJECT_BIT = 16;
 	public static final short MARTELO_BIT  = 32;
+	public static final short SACO_BIT  = 64;
 
 
 	@Override

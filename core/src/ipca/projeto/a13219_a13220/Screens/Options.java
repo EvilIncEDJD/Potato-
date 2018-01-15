@@ -9,8 +9,8 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class Options {
     public static boolean soundEnabled = true;
-    public static int[] highscores = new int[] {100, 80, 50, 30, 10};
-    public final static String file = "bacalhau";
+    public static int[] highscores = new int[] {0, 0, 0, 0, 0};
+    public final static String file = "potato";
 
     public static void load () {
         try {

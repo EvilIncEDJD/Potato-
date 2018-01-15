@@ -27,7 +27,7 @@ public class Hud implements Disposable {
     private Integer worldTimer;
     private boolean timeUp; // true when the world timer reaches 0
     private float timeCount;
-    private static Integer score;
+    public static int score;
 
     //Scene2D widgets
     private Label countdownLabel;
@@ -97,6 +97,10 @@ public class Hud implements Disposable {
         scoreLabel.setText(String.format("%06d", score));
     }
 
+    public static int GetScore()
+    {
+        return score;
+    }
     @Override
     public void dispose()
     {
