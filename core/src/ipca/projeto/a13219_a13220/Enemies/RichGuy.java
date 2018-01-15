@@ -22,7 +22,7 @@ public class RichGuy extends Enemy {
 
     private float stateTime;
     public Body body;
-    private TextureRegion playerDefault;
+    private TextureRegion morto;
 
     private Animation running;
     private Animation jump;
@@ -42,15 +42,20 @@ public class RichGuy extends Enemy {
         }
         setBounds(getX(), getY(), 128 / Potato.PPM, 128 / Potato.PPM);
         stateTime = 0;
+
     }
     public void update(float dt) {
         stateTime += dt;
         if(setToDestroy && !destroyed) {
             world.destroyBody(body);
             destroyed = true;
+            setRegion( new TextureRegion(screen.getAtlas().findRegion("morto"),0,0,128,128));
+            stateTime = 0;
         }
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) running.getKeyFrame(stateTime, true));
+        else if(!destroyed) {
+            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+            setRegion((TextureRegion) running.getKeyFrame(stateTime, true));
+        }
     }
     @Override
     public void defineEnemy()
@@ -78,6 +83,7 @@ public class RichGuy extends Enemy {
     }
     @Override
     public void hitwithHammer(Martelo martelo) {
+
         setToDestroy = true;
         Hud.addScore(10);
     }
