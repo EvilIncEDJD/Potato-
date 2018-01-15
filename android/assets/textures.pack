@@ -1,0 +1,33 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+RunFausto
+  rotate: false
+  xy: 1, 981
+  size: 1210, 256
+  orig: 1210, 256
+  offset: 0, 0
+  index: -1
+badguy
+  rotate: false
+  xy: 1, 723
+  size: 1188, 256
+  orig: 1188, 256
+  offset: 0, 0
+  index: -1
+batata
+  rotate: false
+  xy: 1, 1
+  size: 448, 720
+  orig: 448, 720
+  offset: 0, 0
+  index: -1
+martelo
+  rotate: false
+  xy: 451, 593
+  size: 512, 128
+  orig: 512, 128
+  offset: 0, 0
+  index: -1

@@ -5,7 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import ipca.projeto.a13219_a13220.Item.Martelo;
 import ipca.projeto.a13219_a13220.Screens.PlayScreen;
+import ipca.projeto.a13219_a13220.Sprites.Player;
 
 /**
  * Created by Bruno on 14/01/2018.
@@ -27,6 +29,6 @@ public abstract class Enemy extends Sprite {
     }
 
     protected abstract void defineEnemy();
-
+    public abstract void hitwithHammer(Martelo martelo);
     public abstract void update(float dt);
 }

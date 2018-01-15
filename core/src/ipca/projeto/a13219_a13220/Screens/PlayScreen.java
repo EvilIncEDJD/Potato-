@@ -23,7 +23,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import ipca.projeto.a13219_a13220.Enemies.Enemy;
 import ipca.projeto.a13219_a13220.HUD.Hud;
+import ipca.projeto.a13219_a13220.Item.Batata;
 import ipca.projeto.a13219_a13220.Outros.Assets;
+import ipca.projeto.a13219_a13220.Outros.ObjectContact;
 import ipca.projeto.a13219_a13220.Outros.WorldCreator;
 import ipca.projeto.a13219_a13220.Potato;
 import ipca.projeto.a13219_a13220.Sprites.Player;
@@ -62,7 +64,7 @@ public class PlayScreen implements Screen {
     private boolean sound;
     public PlayScreen(Potato game){
 
-        atlas = new TextureAtlas("Sprites.pack");
+        atlas = new TextureAtlas("textures.pack");
         this.game = game;
         sound = true;
 
@@ -86,7 +88,7 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0,-9),true);
 
         player = new Player(this);
-        //richGuy = new RichGuy(this, 256/MyGame.PPM,256/MyGame.PPM);
+        world.setContactListener(new ObjectContact());
         b2dr = new Box2DDebugRenderer();
 
         creator = new WorldCreator(this);
@@ -102,6 +104,8 @@ public class PlayScreen implements Screen {
             player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.body.getLinearVelocity().x>=-2)
             player.body.applyLinearImpulse(new Vector2(-1f,0f),player.body.getWorldCenter(),true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            player.fire();
 
     }
     public void update(float dt) {
@@ -119,9 +123,10 @@ public class PlayScreen implements Screen {
 
                 for(Enemy enemy : creator.getBadGuy()) {
                     enemy.update(dt);
-                      /* if (enemy.getX() < player.getX() + 224 / MyGame.PPM) {
-                            enemy.body.setActive(true);
-                        }*/
+                }
+                    for(Batata batata : creator.getBatatas()) {
+                        batata.update(dt);
+
                 }
 
                 camera.position.x = player.body.getPosition().x;
@@ -135,6 +140,9 @@ public class PlayScreen implements Screen {
                         return;
                     }
                 }
+                if (player.currentState == Player.State.DEAD)
+                  state = State.GAMEOVER;
+
 
                 break;
             case PAUSA:
@@ -174,8 +182,10 @@ public class PlayScreen implements Screen {
                     }
 
                 }
+
                 break;
             case GAMEOVER:
+                game.setScreen(new GameOverScreen(game));
                 break;
         }
 
@@ -213,6 +223,11 @@ public class PlayScreen implements Screen {
 
         for (Enemy enemy : creator.getBadGuy())
             enemy.draw(game.batch);
+
+        for(Batata batata : creator.getBatatas()) {
+            batata.draw(game.batch);
+
+        }
         player.draw(game.batch);
         // richGuy.draw(game.batch);
         game.batch.end();
@@ -253,7 +268,6 @@ public class PlayScreen implements Screen {
     public TiledMap getMap(){
         return map;
     }
-
 
     @Override
     public void resize(int width, int height)

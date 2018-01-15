@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.12.21" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="128" tileheight="128" infinite="0" nextobjectid="115">
+<map version="1.0" tiledversion="2017.12.21" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="128" tileheight="128" infinite="0" nextobjectid="117">
  <tileset firstgid="1" source="TemplTerra-03.tsx"/>
  <tileset firstgid="2" source="Terra.tsx"/>
  <tileset firstgid="3" name="TemplTerra4-04" tilewidth="128" tileheight="128" tilecount="1" columns="0">
@@ -135,5 +135,9 @@
   <object id="112" x="23296" y="896" width="128" height="128"/>
   <object id="113" x="24832" y="1280" width="128" height="128"/>
   <object id="114" x="27392" y="1280" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup name="batata">
+  <object id="115" x="1066.67" y="1327.27" width="39.3939" height="39.3939"/>
+  <object id="116" x="1320" y="1328" width="44" height="40"/>
  </objectgroup>
 </map>
