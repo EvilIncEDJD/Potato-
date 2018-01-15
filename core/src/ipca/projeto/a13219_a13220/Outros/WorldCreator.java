@@ -48,6 +48,7 @@ public class WorldCreator {
             body = world.createBody(bdef);
             polygonShape.setAsBox(rect.getWidth() / 2 / Potato.PPM, rect.getHeight() / 2 / Potato.PPM);
             fdef.shape = polygonShape;
+            fdef.filter.categoryBits = Potato.GROUND_BIT;
             body.createFixture(fdef);
         }
 //lava

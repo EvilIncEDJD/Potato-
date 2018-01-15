@@ -10,6 +10,7 @@ import ipca.projeto.a13219_a13220.Enemies.Enemy;
 import ipca.projeto.a13219_a13220.Item.Items;
 import ipca.projeto.a13219_a13220.Item.Martelo;
 import ipca.projeto.a13219_a13220.Potato;
+import ipca.projeto.a13219_a13220.Screens.PlayScreen;
 import ipca.projeto.a13219_a13220.Sprites.Player;
 
 /**
@@ -54,7 +55,13 @@ public class ObjectContact implements ContactListener {
                     ((Enemy) fixB.getUserData()).hitwithHammer((Martelo) fixA.getUserData());
                     ((Martelo)fixA.getUserData()).setToDestroy();
                 }
-
+                break;
+            case Potato.PLAYER_BIT | Potato.GROUND_BIT:
+                if(fixA.getFilterData().categoryBits == Potato.PLAYER_BIT)
+                    ((Player) fixA.getUserData()).AllowJump();
+                else
+                    ((Player) fixB.getUserData()).AllowJump();
+                break;
 
 
 

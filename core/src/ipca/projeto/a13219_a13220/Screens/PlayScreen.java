@@ -62,12 +62,15 @@ public class PlayScreen implements Screen {
     private Rectangle noBounds;
     private Rectangle soundBounds;
     private boolean sound;
+    private int jumpTimes;
+    public boolean needJump;
     public PlayScreen(Potato game){
 
         atlas = new TextureAtlas("textures.pack");
         this.game = game;
         sound = true;
-
+        jumpTimes = 2;
+        needJump = false;
         touchPoint = new Vector3();
         camera = new OrthographicCamera();
         camera2 = new OrthographicCamera(Potato.V_WIDTH / Potato.PPM,Potato.V_HEIGHT / Potato.PPM);
@@ -97,8 +100,17 @@ public class PlayScreen implements Screen {
 
 
     public void HandleInput(float dt){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-            player.body.applyLinearImpulse(new Vector2(0,6f),player.body.getWorldCenter(),true);
+
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && jumpTimes !=0)
+            {
+                if(jumpTimes == 2)
+            player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                if(jumpTimes == 1)
+                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+            jumpTimes--;
+
+        }
+
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.body.getLinearVelocity().x<=2)
             player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
@@ -200,6 +212,11 @@ public class PlayScreen implements Screen {
         return atlas;
     }
 
+    public void AllowJump()
+    {
+        jumpTimes = 2;
+    }
+
     @Override
     public void show() {
 
@@ -259,6 +276,7 @@ public class PlayScreen implements Screen {
 
 
     }
+
 
     public World getWorld()
     {

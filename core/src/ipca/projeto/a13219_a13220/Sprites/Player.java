@@ -76,6 +76,8 @@ public class Player extends Sprite {
 
         setPosition(body.getPosition().x - getWidth()/2,body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
+
+
     }
 
     public TextureRegion getFrame(float dt)
@@ -146,6 +148,11 @@ public class Player extends Sprite {
 
     public void hit() {
         die();
+    }
+
+    public void AllowJump()
+    {
+        screen.AllowJump();
     }
 
     public void fire(){
