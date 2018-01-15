@@ -1,0 +1,8 @@
+package ipca.projeto.a13219_a13220.Item;
+
+/**
+ * Created by Bruno on 15/01/2018.
+ */
+
+public class MoneyBag {
+}
