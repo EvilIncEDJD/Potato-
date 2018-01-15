@@ -54,9 +54,8 @@ public class PlayScreen implements Screen {
     private WorldCreator creator;
     private World world;
     private Player player;
-    //private RichGuy richGuy;
     private TextureAtlas atlas;
-    private Box2DDebugRenderer b2dr;
+   // private Box2DDebugRenderer b2dr;
     private Rectangle pauseBounds;
     private Rectangle restartBounds;
     private Rectangle noBounds;
@@ -97,7 +96,7 @@ public class PlayScreen implements Screen {
 
         player = new Player(this);
         world.setContactListener(new ObjectContact());
-        b2dr = new Box2DDebugRenderer();
+       // b2dr = new Box2DDebugRenderer();
 
         creator = new WorldCreator(this);
 
@@ -137,7 +136,7 @@ public class PlayScreen implements Screen {
                     player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
                 jumpTimes--;
             }
-            if(marteloBounds.contains(touchPoint.x, touchPoint.y)&& jumpTimes !=0)
+            if(marteloBounds.contains(touchPoint.x, touchPoint.y))
             {
                 player.fire();
             }
@@ -265,7 +264,7 @@ public class PlayScreen implements Screen {
         /*renderer.getBatch().begin();
        renderer.renderImageLayer((TiledMapImageLayer) map.getLayers().get(0));
        renderer.getBatch().end();*/
-        b2dr.render(world,camera.combined);
+       // b2dr.render(world,camera.combined);
 
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
@@ -350,7 +349,7 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        b2dr.dispose();
+      //  b2dr.dispose();
         hud.dispose();
     }
 }

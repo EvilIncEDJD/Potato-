@@ -22,10 +22,8 @@ public class GameOverScreen extends ScreenAdapter{
     Vector3 touchPoint;
     Rectangle backBounds;
     private Rectangle restartBounds;
-    String[] highScores;
     String score, gameOver, scoreText;
-    float xOffset = 0;
-    GlyphLayout glyphLayout = new GlyphLayout();
+
 
     public GameOverScreen(Potato game) {
         this.game = game;

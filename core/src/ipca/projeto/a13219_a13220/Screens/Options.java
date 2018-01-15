@@ -23,7 +23,7 @@ public class Options {
                 highscores[i] = Integer.parseInt(strings[i+1]);
             }
         } catch (Throwable e) {
-            // :( It's ok we have defaults
+
         }
     }
 

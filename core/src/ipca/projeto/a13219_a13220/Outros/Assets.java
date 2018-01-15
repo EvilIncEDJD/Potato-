@@ -44,8 +44,8 @@ public class Assets {
         arrowred = new Texture("imagens/play.png");
         arrow = new Texture("imagens/arrow.png");
         restartButton = new Texture("imagens/restart.png");
-        soundButton= new Texture("imagens/somON.png");
-        nosoundButton = new Texture("imagens/somOFF.png");
+        soundButton= new Texture("imagens/SomON.png");
+        nosoundButton = new Texture("imagens/SomOFF.png");
         noButton = new Texture("imagens/home.png");
         clickSound = Gdx.audio.newSound(Gdx.files.internal("Sound/Click.wav"));
 
