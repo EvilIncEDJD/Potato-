@@ -49,7 +49,10 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-
+    private float timeSeconds = 0f;
+    private float period = 0.2f;
+    private float jumptimeSeconds = 0f;
+    private float jumpperiod = 0.3f;
     private Vector3 touchPoint;
     private WorldCreator creator;
     private World world;
@@ -114,33 +117,50 @@ public class PlayScreen implements Screen {
             jumpTimes--;
 
         }
-        if (Gdx.input.isTouched()) {
-            camera2.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (leftBounds.contains(touchPoint.x, touchPoint.y)&& player.body.getLinearVelocity().x>=-2) {
-                player.body.applyLinearImpulse(new Vector2(-1f,0f),player.body.getWorldCenter(),true);
-                return;
-            }
-            if (rightBounds.contains(touchPoint.x, touchPoint.y)&& player.body.getLinearVelocity().x<=2)
-            {
-                player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
-                return;
+        for(int i = 0; i <5; i++) {
+            if (Gdx.input.isTouched(i)) {
+                camera2.unproject(touchPoint.set(Gdx.input.getX(i), Gdx.input.getY(i), 0));
+                if (leftBounds.contains(touchPoint.x, touchPoint.y) && player.body.getLinearVelocity().x >= -2) {
+                    player.body.applyLinearImpulse(new Vector2(-1f, 0f), player.body.getWorldCenter(), true);
+                    return;
+                }
+                if (rightBounds.contains(touchPoint.x, touchPoint.y) && player.body.getLinearVelocity().x <= 2) {
+                    player.body.applyLinearImpulse(new Vector2(1f, 0f), player.body.getWorldCenter(), true);
+                    return;
+                }
+                if(jumpBounds.contains(touchPoint.x, touchPoint.y)&& jumpTimes !=0)
+                {
+                    if(jumpTimes == 2) {
+                        player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                        jumpTimes--;
+                    }
+
+
+                    jumptimeSeconds += Gdx.graphics.getRawDeltaTime();
+
+                    if (jumpTimes == 1 && jumptimeSeconds > jumpperiod)
+                        {
+                            jumptimeSeconds -= jumpperiod;
+                                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+
+                                jumpTimes--;
+                        }
+
+                }
+
+                    if(marteloBounds.contains(touchPoint.x, touchPoint.y))
+                    {
+                        timeSeconds += Gdx.graphics.getRawDeltaTime();
+                        if(timeSeconds > period){
+                            timeSeconds-=period;
+                            player.fire();
+                        }
+
+                    }
+
             }
         }
-        if (Gdx.input.justTouched()) {
-            camera2.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if(jumpBounds.contains(touchPoint.x, touchPoint.y)&& jumpTimes !=0)
-            {
-                if(jumpTimes == 2)
-                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
-                if(jumpTimes == 1)
-                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
-                jumpTimes--;
-            }
-            if(marteloBounds.contains(touchPoint.x, touchPoint.y))
-            {
-                player.fire();
-            }
-        }
+
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.body.getLinearVelocity().x<=2)
             player.body.applyLinearImpulse(new Vector2(1f,0f),player.body.getWorldCenter(),true);
